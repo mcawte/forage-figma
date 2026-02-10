@@ -1,5 +1,6 @@
 <html>
 <body>
+<div id="status" style="font-family: Inter, sans-serif; font-size: 11px; color: #999; padding: 8px; text-align: center;">Connecting...</div>
 <script>
 // Forage for Figma — UI Iframe (WebSocket Bridge)
 // This iframe has network access but NO Plugin API access.
@@ -15,6 +16,8 @@ function connect() {
 
   ws.onopen = function() {
     console.log('[forage] Connected to MCP server');
+    document.getElementById('status').textContent = 'Connected';
+    document.getElementById('status').style.color = '#4caf50';
     reconnectDelay = 1000;
   };
 
@@ -30,6 +33,8 @@ function connect() {
 
   ws.onclose = function() {
     console.log('[forage] Disconnected from MCP server, reconnecting in ' + reconnectDelay + 'ms...');
+    document.getElementById('status').textContent = 'Reconnecting...';
+    document.getElementById('status').style.color = '#999';
     ws = null;
     setTimeout(function() {
       reconnectDelay = Math.min(reconnectDelay * 1.5, MAX_RECONNECT_DELAY);

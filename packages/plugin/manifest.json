@@ -6,6 +6,7 @@
   "ui": "build/ui.html",
   "documentAccess": "dynamic-page",
   "editorType": ["figma", "dev"],
+  "capabilities": ["inspect"],
   "networkAccess": {
     "allowedDomains": ["none"],
     "devAllowedDomains": ["ws://localhost:18412"],

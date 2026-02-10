@@ -5,7 +5,7 @@
 import type { ForageCommand, ForageResponse, SimplifiedPage } from "@forage/shared";
 
 // Show the UI iframe (hidden — it only serves as a WebSocket bridge)
-figma.showUI(__html__, { visible: false, width: 0, height: 0 });
+figma.showUI(__html__, { visible: true, width: 200, height: 36 });
 
 // ── Command Dispatcher ────────────────────────────────────────────────────────
 
@@ -272,7 +272,8 @@ async function findPageById(pageId: string): Promise<PageNode> {
 
 // ── Tier 1: Discovery ─────────────────────────────────────────────────────────
 
-function handleGetPages(): SimplifiedPage[] {
+async function handleGetPages(): Promise<SimplifiedPage[]> {
+  await figma.loadAllPagesAsync();
   return figma.root.children.map((page) => ({
     id: page.id,
     name: page.name,
