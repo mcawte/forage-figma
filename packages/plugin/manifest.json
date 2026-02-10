@@ -1,0 +1,14 @@
+{
+  "name": "Forage for Figma",
+  "id": "forage-figma-mcp",
+  "api": "1.0.0",
+  "main": "build/code.js",
+  "ui": "build/ui.html",
+  "documentAccess": "dynamic-page",
+  "editorType": ["figma"],
+  "networkAccess": {
+    "allowedDomains": ["ws://localhost"],
+    "devAllowedDomains": ["ws://localhost:*"]
+  },
+  "permissions": ["currentuser"]
+}

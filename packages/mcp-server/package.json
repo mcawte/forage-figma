@@ -1,0 +1,27 @@
+{
+  "name": "forage-mcp",
+  "version": "0.1.0",
+  "description": "Forage MCP server — Gather exactly what you need from your Figma designs",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "forage-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup"
+  },
+  "dependencies": {
+    "@forage/shared": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "ws": "^8.18.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.14",
+    "tsup": "^8.3.5"
+  }
+}

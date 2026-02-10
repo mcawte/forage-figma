@@ -1,0 +1,15 @@
+{
+  "name": "forage",
+  "private": true,
+  "description": "Forage — Gather exactly what you need from your designs",
+  "license": "MIT",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "typescript": "~5.7.3",
+    "vitest": "~3.0.4"
+  }
+}
