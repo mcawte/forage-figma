@@ -42,14 +42,12 @@ The three-tier bridge is dictated by Figma's plugin sandbox model:
 
 ### Option A: Claude Code Plugin (Recommended)
 
-Add the marketplace and install the plugin:
-
 ```bash
 claude plugin marketplace add mcawte/forage-figma
 claude plugin install forage@forage-figma
 ```
 
-This gives you the MCP server **and** the `/implement-design` skill. Then in any project:
+This registers the repo as a plugin source and installs the Forage plugin, which includes the MCP server and the `/implement-design` skill. Then in any project:
 
 ```
 /implement-design the dashboard page from our Figma file
