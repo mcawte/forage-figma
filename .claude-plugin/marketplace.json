@@ -1,0 +1,19 @@
+{
+  "name": "forage-figma",
+  "owner": {
+    "name": "Forage Contributors"
+  },
+  "metadata": {
+    "description": "Figma design tools for LLMs — progressive navigation, design tokens, state inference"
+  },
+  "plugins": [
+    {
+      "name": "forage",
+      "source": ".",
+      "description": "MCP server + /implement-design skill for building code from Figma designs",
+      "version": "0.1.0",
+      "license": "MIT",
+      "keywords": ["figma", "design", "mcp", "design-tokens", "tailwind", "components"]
+    }
+  ]
+}
