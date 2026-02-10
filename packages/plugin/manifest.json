@@ -8,7 +8,7 @@
   "editorType": ["figma"],
   "networkAccess": {
     "allowedDomains": ["none"],
-    "devAllowedDomains": ["ws://localhost:*"],
+    "devAllowedDomains": ["ws://localhost:18412"],
     "reasoning": "Connects to local MCP server via WebSocket for design data extraction"
   },
   "permissions": ["currentuser"]
