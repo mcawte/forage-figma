@@ -1,0 +1,12 @@
+{
+  "name": "forage",
+  "version": "0.1.0",
+  "description": "Gather exactly what you need from your Figma designs — progressive navigation, design tokens, state inference",
+  "author": {
+    "name": "Forage Contributors"
+  },
+  "repository": "https://github.com/mcawte/forage-figma",
+  "license": "MIT",
+  "keywords": ["figma", "design", "mcp", "design-tokens", "tailwind", "components"],
+  "mcpServers": "./.mcp.json"
+}
