@@ -40,9 +40,30 @@ The three-tier bridge is dictated by Figma's plugin sandbox model:
 
 ## Quick Start
 
-### 1. Install the MCP Server
+### Option A: Claude Code Plugin (Recommended)
 
-Add to your Claude Code config (`~/.claude/claude_code_config.json`):
+This installs the MCP server **and** the `/implement-design` skill:
+
+```bash
+claude plugin install mcawte/forage-figma
+```
+
+Then in any project:
+
+```
+/implement-design the dashboard page from our Figma file
+```
+
+The skill guides Claude through a 5-phase workflow: detect your stack, extract design tokens, survey the design, build components bottom-up, assemble layouts, and quality-check the result.
+
+### Option B: Manual MCP Server Setup
+
+Add the following to your MCP client config:
+
+| Client | Config file |
+|--------|------------|
+| Claude Code | `~/.claude/claude_code_config.json` |
+| Cursor | `.cursor/mcp.json` |
 
 ```json
 {
@@ -55,33 +76,22 @@ Add to your Claude Code config (`~/.claude/claude_code_config.json`):
 }
 ```
 
-Or for Cursor (`.cursor/mcp.json`):
+### Install the Figma Plugin
 
-```json
-{
-  "mcpServers": {
-    "forage": {
-      "command": "npx",
-      "args": ["-y", "forage-mcp"]
-    }
-  }
-}
-```
-
-### 2. Install the Figma Plugin
-
-1. Open Figma
+1. Open Figma desktop app
 2. Go to **Plugins > Development > Import plugin from manifest...**
 3. Select `packages/plugin/manifest.json`
-4. Run the plugin — it will connect to the MCP server automatically
+4. Run the plugin — it connects to the MCP server automatically
 
-### 3. Start Using
+### Start Using
 
 Open a Figma file, run the plugin, then ask your LLM:
 
 > "Look at the Figma file and tell me what pages are available"
 
 The LLM will use `forage_list_pages` to explore, then progressively drill down using the other tools.
+
+If using Claude Code with the plugin installed, use `/implement-design` for a structured end-to-end workflow.
 
 ## Tool Reference
 
@@ -176,13 +186,15 @@ pnpm test
 ### Monorepo Structure
 
 ```
-forage/
+forage-figma/
+├── .claude-plugin/       — Claude Code plugin manifest
+├── skills/
+│   └── implement-design/ — /implement-design skill (5-phase workflow)
 ├── packages/
-│   ├── shared/      — @forage/shared (types + constants)
-│   ├── plugin/      — @forage/plugin (Figma plugin)
-│   └── mcp-server/  — forage-mcp (MCP server)
-├── skill/           — SKILL.md companion guide
-└── examples/        — Client config examples
+│   ├── shared/           — @forage/shared (types + constants)
+│   ├── plugin/           — @forage/plugin (Figma plugin)
+│   └── mcp-server/       — forage-mcp (MCP server)
+└── .mcp.json             — MCP server config for plugin system
 ```
 
 ## License
