@@ -1,0 +1,56 @@
+<html>
+<body>
+<script>
+// Forage for Figma — UI Iframe (WebSocket Bridge)
+// This iframe has network access but NO Plugin API access.
+// It relays messages between the MCP server (via WebSocket) and the plugin main thread (via postMessage).
+
+const WS_PORT = 18412;
+let ws = null;
+let reconnectDelay = 1000;
+const MAX_RECONNECT_DELAY = 10000;
+
+function connect() {
+  ws = new WebSocket('ws://localhost:' + WS_PORT);
+
+  ws.onopen = function() {
+    console.log('[forage] Connected to MCP server');
+    reconnectDelay = 1000;
+  };
+
+  ws.onmessage = function(event) {
+    // Command from MCP server → forward to plugin main thread
+    try {
+      var msg = JSON.parse(event.data);
+      parent.postMessage({ pluginMessage: msg }, '*');
+    } catch (e) {
+      console.error('[forage] Failed to parse message from server:', e);
+    }
+  };
+
+  ws.onclose = function() {
+    console.log('[forage] Disconnected from MCP server, reconnecting in ' + reconnectDelay + 'ms...');
+    ws = null;
+    setTimeout(function() {
+      reconnectDelay = Math.min(reconnectDelay * 1.5, MAX_RECONNECT_DELAY);
+      connect();
+    }, reconnectDelay);
+  };
+
+  ws.onerror = function() {
+    // onclose will fire after this, triggering reconnect
+  };
+}
+
+// Response from plugin main thread → forward to MCP server via WebSocket
+window.onmessage = function(event) {
+  var msg = event.data.pluginMessage;
+  if (msg && ws && ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify(msg));
+  }
+};
+
+connect();
+</script>
+</body>
+</html>
