@@ -7,8 +7,9 @@
   "documentAccess": "dynamic-page",
   "editorType": ["figma"],
   "networkAccess": {
-    "allowedDomains": ["ws://localhost"],
-    "devAllowedDomains": ["ws://localhost:*"]
+    "allowedDomains": ["none"],
+    "devAllowedDomains": ["ws://localhost:*"],
+    "reasoning": "Connects to local MCP server via WebSocket for design data extraction"
   },
   "permissions": ["currentuser"]
 }
